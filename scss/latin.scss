@@ -1,0 +1,404 @@
+@charset "utf-8";
+@use './common.scss';
+
+//변수(variables)
+$body-bg: #e8e7e3;
+$white: #fff;
+$beige: #e5dfd8;
+$text-main: #1f1a17;
+$text-sub: #7b746d;
+$border: #e3ddd7;
+$shadow: 0 18px 35px rgba(0, 0, 0, 0.08);
+$font-title: "Times New Roman", serif;
+
+$container-width: 1080px;
+$transition: all 0.3s ease;
+
+// mixin - 여러 css 속성을 묶어서 재사용하는 기능
+@mixin flexCenters($justify: center, $align: center) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin sectionPadding($top: 60px, $bottom: 50px) {
+    padding-top: $top;
+    padding-bottom: $bottom;
+}
+
+@mixin cardBorder {
+    border: 1px solid $border;
+    background: $white;
+}
+
+@mixin imageCover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+// 기본
+html,
+body {
+    height: 100%;
+}
+
+body {
+    color: $text-main;
+    background: $body-bg;
+}
+
+// 전체 페이지
+#wrap {
+    padding: 80px 20px;
+}
+
+.container {
+    max-width: $container-width;
+    margin: 0 auto;
+    background: $white;
+    box-shadow: $shadow;
+}
+
+.sec-white {
+    background: $white;
+}
+
+.sec-title,
+.sec-heading {
+    text-align: center;
+
+    h3 {
+        font-family: $font-title;
+        font-size: 32px;
+        font-weight: 600;
+        letter-spacing: -1px;
+    }
+
+    p {
+        font-size: 18px;
+    }
+}
+
+.sec-desc {
+    max-width: 560px;
+    margin: 20px auto 0;
+    color: $text-sub;
+    line-height: 1.8;
+}
+
+.title-line {
+    display: inline-block;
+    width: 45px;
+    height: 2px;
+    background: #9e968e;
+    margin-top: 30px;
+}
+
+.btn-line {
+    display: inline-block;
+    min-width: 112px;
+    padding: 10px 35px;
+    border: 1px solid #7b746d;
+    font-size: 18px;
+    letter-spacing: -1px;
+    transition: $transition;
+    text-align: center;
+
+    &:hover {
+        background: $text-main;
+        color: $white;
+    }
+}
+
+// hero
+.hero {
+    position: relative;
+    min-height: 460px;
+    padding: 24px 36px 60px;
+    background: linear-gradient(rgba(232, 224, 115, 0.5),
+            rgba(232, 224, 215, 0.2)),
+        url(https://images.unsplash.com/photo-1631679706909-1844bbd07221?q=80&w=1092&auto=format&fit=crop) no-repeat center/cover;
+
+    .header {
+        @include flexCenters(space-between, center);
+        gap: 20px;
+
+        .logo {
+            font-family: $font-title;
+            font-size: 35px;
+            font-weight: 600;
+            color: $text-main;
+        }
+
+        .gnb {
+            ul {
+                @include flexCenters(center, center);
+                gap: 35px;
+                flex-wrap: wrap;
+            }
+
+            a {
+                font-size: 18px;
+                color: $text-main;
+                transition: $transition;
+
+                &:hover {
+                    color: $border;
+                }
+            }
+        }
+    }
+
+    .btn-cart {
+        background: none;
+        font-size: 18px;
+        color: $text-main;
+    }
+
+    .hero-content {
+        min-height: 300px;
+        @include flexCenters(center, center);
+        flex-direction: column;
+        text-align: center;
+
+        .sub-title {
+            font-size: 16px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: $white;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-family: $font-title;
+            font-size: 40px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+            color: $white;
+        }
+    }
+}
+
+// intro
+.intro.sec-white {
+    @include sectionPadding(60px, 60px)
+}
+
+// feature grid
+.feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    min-height: 300px;
+}
+
+.feature-img {
+    img {
+        @include imageCover;
+        height: 100%;
+    }
+}
+
+.feature-text {
+    background: #faeeea;
+    @include flexCenters(center, center);
+    flex-direction: column;
+    text-align: center;
+    padding: 30px;
+
+    .feature-label {
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        color: $text-main;
+        margin-bottom: 10px;
+    }
+
+    h3 {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+    p {
+        margin-bottom: 20px;
+        max-width: 340px;
+        line-height: 1.7;
+        word-break: keep-all;
+    }
+}
+
+/* posts */
+.posts.section-white {
+    padding: 4rem 0;
+
+    .section-heading {
+        h3 {
+            font-family: $font-title;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 18px;
+            color: $text-sub;
+            margin-bottom: 40px;
+        }
+    }
+
+    .post-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        padding: 0 100px;
+        gap: 20px;
+
+        .post-card {
+            border: 1px solid $beige;
+
+            img {
+                width: 100%;
+                height: 230px;
+                object-fit: cover;
+                display: block;
+            }
+
+            .post-info {
+                padding: 20px 15px;
+
+                h4 {
+                    margin-bottom: 10px;
+                }
+
+                .post-summary {
+                    height: 50px;
+                    line-height: 1.4;
+                    color: $text-sub;
+                    word-break: keep-all;
+                    margin-bottom: 30px;
+                }
+            }
+
+            .meta {
+                padding: 10px 15px;
+                color: $text-sub;
+                display: flex;
+                justify-content: space-between;
+                border-top: 1px solid $beige;
+            }
+        }
+    }
+}
+
+/* 베스트 셀러 */
+.best-items {
+    margin-bottom: 80px;
+
+    .sec-heading.beige {
+        background: $beige;
+        min-height: 100px;
+        @include flexCenters(center, center);
+        margin-bottom: 45px;
+
+        h3 {
+            font-weight: 600;
+        }
+    }
+
+    .product-list {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 0 80px;
+
+        .product-card {
+            width: 25%;
+            text-align: center;
+        }
+
+        .thumb {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+        }
+
+        .product-info {
+            text-align: center;
+
+            h4 {
+                font-size: 17px;
+                margin: 10px 0;
+                height: 48px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                word-break: keep-all;
+            }
+
+            .product-desc {
+                color: $text-sub;
+                word-break: keep-all;
+                height: 52px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+
+            .price {
+                margin-top: 0;
+            }
+        }
+    }
+}
+
+/* about */
+.about {
+    background: $beige;
+    padding: 30px 100px;
+    text-align: center;
+
+    h3 {
+        font-family: $font-title;
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
+
+    p {
+        color: $text-sub;
+        line-height: 1.8;
+        font-weight: 400;
+    }
+}
+
+footer {
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .footer-logo {
+        font-size: 24px;
+        color: $text-sub;
+    }
+
+    .footer-text {
+        font-size: 14px;
+        color: $text-sub;
+    }
+
+    .copyright {
+        font-size: 16px;
+        color: $text-sub;
+    }
+}
